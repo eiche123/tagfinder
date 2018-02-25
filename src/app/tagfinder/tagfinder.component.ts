@@ -10,7 +10,6 @@ import { DataService } from '../data.service';
 })
 export class TagfinderComponent implements OnInit {
 
-  // tag: Tag = new Tag('init');
   tags: Tag[] = new Array();
   texts: string[] = new Array();
   selectedCount = 0;
@@ -30,7 +29,6 @@ export class TagfinderComponent implements OnInit {
           const regExTag =  /#[^ |\n|#|@]*/g;
 
           const tagSets = tags.match(regExText);
-          // let tags2: Tag[] = new Array();
 
           tagSets.forEach(tagSet => {
 
@@ -56,8 +54,6 @@ export class TagfinderComponent implements OnInit {
           });
 
           this.tags = this.tags.filter( tag => tag.count > 3 ).slice(0, 40);
-
-          // this.tags = tags2;
         }
       );
   }
