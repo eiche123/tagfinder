@@ -1,0 +1,13 @@
+<div>{{ selectedCount }}</div>
+<!--<div>{{ tag.name  }} - {{tag.media_count }}</div>-->
+<input #newTag type="text" (keyup.enter)="getMediaByTag(newTag.value)">
+<ul>
+  <li *ngFor="let tag of tags" [ngClass]="tag.selected ? 'selected' : ''" (click)="toggleTag(tag)">
+    {{tag.name}} - {{tag.count}}
+  </li>
+</ul>
+
+<ul>
+  <li *ngFor="let text of texts">{{ text }}</li>
+</ul>
+

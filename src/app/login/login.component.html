@@ -1,0 +1,10 @@
+<div id="login-wrapper">
+  <h1>Hi buddy!</h1>
+  <p>
+    <b>{{ mainText }}</b>
+    <span *ngIf="subText !== ''">{{ subText }}</span>
+  </p>
+
+  <button (click)="login()">Login</button>
+
+</div>

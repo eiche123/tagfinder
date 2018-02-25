@@ -1,0 +1,19 @@
+#login-wrapper {
+  width: 80%;
+  padding: 0px 10%;
+  position: absolute;
+  top: 15%;
+  left: 0px;
+  right: 0px;
+}
+
+button {
+  border: 1px solid #f0ffff;
+  background: none;
+  padding: 7px 27px;
+  text-align:  center;
+  color:  #f0ffff;
+  font-family: 'Work Sans', sans-serif;
+  font-weight: 200;
+  font-size: 14px;
+}
