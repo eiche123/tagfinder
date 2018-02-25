@@ -10,7 +10,7 @@ import { DataService } from '../data.service';
 })
 export class TagfinderComponent implements OnInit {
 
-  //tag: Tag = new Tag('init');
+  // tag: Tag = new Tag('init');
   tags: Tag[] = new Array();
   texts: string[] = new Array();
   selectedCount = 0;
@@ -18,22 +18,7 @@ export class TagfinderComponent implements OnInit {
   constructor(private dataService: DataService) { }
 
   ngOnInit() {
-    this.getTag();
-    this.getTags( 'snow');
-  }
 
-  getTag(): void {
-    this.dataService.getTagInfo('snow')
-      .subscribe(
-        tag => console.log(tag) //this.tag = tag
-      );
-  }
-
-  getTags(query: string): void {
-    this.dataService.getTags( query )
-      .subscribe(
-        tags =>  console.log (tags) // do nothing
-      );
   }
 
   getMediaByTag(query: string): void {
@@ -45,7 +30,7 @@ export class TagfinderComponent implements OnInit {
           const regExTag =  /#[^ |\n|#|@]*/g;
 
           const tagSets = tags.match(regExText);
-          //let tags2: Tag[] = new Array();
+          // let tags2: Tag[] = new Array();
 
           tagSets.forEach(tagSet => {
 
@@ -54,7 +39,7 @@ export class TagfinderComponent implements OnInit {
             if (tempTags != null) {
               tempTags.forEach(tempTag => {
                 tempTag = tempTag.slice(1);
-                let tag = this.tags.find(x => x.name === tempTag);
+                const tag = this.tags.find(x => x.name === tempTag);
                 if ( tag == null) {
                   // tag not yet stored: store it now
                   this.tags.push(new Tag(tempTag));
@@ -72,7 +57,7 @@ export class TagfinderComponent implements OnInit {
 
           this.tags = this.tags.filter( tag => tag.count > 3 ).slice(0, 40);
 
-          //this.tags = tags2;
+          // this.tags = tags2;
         }
       );
   }
