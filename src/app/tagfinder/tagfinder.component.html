@@ -1,13 +1,28 @@
 <div>{{ selectedCount }}</div>
 <!--<div>{{ tag.name  }} - {{tag.media_count }}</div>-->
-<input #newTag type="text" (keyup.enter)="getMediaByTag(newTag.value)">
-<ul>
-  <li *ngFor="let tag of tags" [ngClass]="tag.selected ? 'selected' : ''" (click)="toggleTag(tag)">
-    {{tag.name}} - {{tag.count}}
-  </li>
-</ul>
+<div class="textarea">
+  <!--<textarea #newTag type="text" (keyup.enter)="getMediaByTag(newTag.value)" rows="10" align="bottom"-->
+            <!--placeholder="Describe your image here. Use #hashtags that we can recommend you more." ></textarea>-->
+
+
+  <p id="input"  contenteditable #newTag (keyup.enter)="defocusInput()"
+     (blur)="text=newTag.innerText" (focus)="focusInput(newTag)" (focusout)="defocusInput()">
+    {{text}}
+  </p>
+
+  <div class="placeholder" *ngIf="showPlaceholder" (click)="focusInput(newTag)">
+    <b>{{placeholderText}}</b>
+    <br>{{placeholderSubtext}}
+  </div>
+  <i *ngIf="showPlaceholder"></i>
+</div>
 
 <ul>
-  <li *ngFor="let text of texts">{{ text }}</li>
+  <li *ngFor="let tag of selected_tags" [ngClass]="tag.selected ? 'selected' : ''" (click)="toggleTag(tag)">
+    {{tag.name}}
+  </li>
+  <li *ngFor="let tag of tags" [ngClass]="tag.selected ? 'selected' : ''" (click)="toggleTag(tag)">
+    {{tag.name}}
+  </li>
 </ul>
 
