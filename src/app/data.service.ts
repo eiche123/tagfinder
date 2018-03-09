@@ -14,4 +14,14 @@ export class DataService {
     const url = this.rootURL + 'explore/tags/' + query + '/';
     return this.http.get( url, { responseType: 'text' });
   }
+
+  getJJCommunityThemeOfTheDay (): Observable<any> {
+    const url = this.rootURL + 'jjcommunity/';
+    return this.http.get( url, { responseType: 'text' });
+  }
+
+  getGOTDThemeOfTheDay (): Observable<any> {
+    const url = this.rootURL + 'gramoftheday/';
+    return this.http.get( url, { responseType: 'text' });
+  }
 }

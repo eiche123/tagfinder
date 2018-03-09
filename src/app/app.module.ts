@@ -6,6 +6,7 @@ import { AppComponent } from './app.component';
 import { TagfinderComponent } from './tagfinder/tagfinder.component';
 import { DataService } from './data.service';
 import { AppRoutingModule } from './/app-routing.module';
+import { ClipboardModule } from 'ngx-clipboard';
 
 
 @NgModule({
@@ -16,7 +17,8 @@ import { AppRoutingModule } from './/app-routing.module';
   imports: [
     BrowserModule,
     HttpClientModule,
-    AppRoutingModule
+    AppRoutingModule,
+    ClipboardModule
   ],
   providers: [
     DataService

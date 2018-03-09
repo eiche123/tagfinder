@@ -1,11 +1,10 @@
-<div>{{ selectedCount }}</div>
-<!--<div>{{ tag.name  }} - {{tag.media_count }}</div>-->
+
 <div class="textarea">
   <!--<textarea #newTag type="text" (keyup.enter)="getMediaByTag(newTag.value)" rows="10" align="bottom"-->
             <!--placeholder="Describe your image here. Use #hashtags that we can recommend you more." ></textarea>-->
 
 
-  <p id="input"  contenteditable #newTag (keyup.enter)="defocusInput()"
+  <p id="input"  contenteditable #newTag
      (blur)="text=newTag.innerText" (focus)="focusInput(newTag)" (focusout)="defocusInput()">
     {{text}}
   </p>
@@ -15,14 +14,33 @@
     <br>{{placeholderSubtext}}
   </div>
   <i *ngIf="showPlaceholder"></i>
+  <img id='send' src="assets/send.png" *ngIf="showStartButton" (click)="startSearch()" />
 </div>
 
-<ul>
-  <li *ngFor="let tag of selected_tags" [ngClass]="tag.selected ? 'selected' : ''" (click)="toggleTag(tag)">
-    {{tag.name}}
-  </li>
-  <li *ngFor="let tag of tags" [ngClass]="tag.selected ? 'selected' : ''" (click)="toggleTag(tag)">
-    {{tag.name}}
-  </li>
-</ul>
 
+<ul>
+  <li id='search' *ngIf="showMoreButton">
+    <img src="assets/search.png" /><input #searchInput (keyup.enter)="search(searchInput.value); searchInput.value=''">
+  </li>
+  <!-- <li id='start_button' *ngIf="showStartButton" (click)="startSearch()">go for it ...</li> -->
+  <li *ngFor="let tag of displayedTags" [ngClass]="determineClass(tag)" (click)="toggleTag(tag)">
+    {{tag.name}}
+    <img class='info' src='assets/info_selected.png' *ngIf="tag.caption != null && tag.selected"
+         (click)="displayOverlay(tag.name, 'flex'); $event.stopPropagation()"/>
+    <img class='info' src='assets/info_notSelected.png' *ngIf="tag.caption != null && !tag.selected"
+         (click)="displayOverlay(tag.name, 'flex'); $event.stopPropagation()"/>
+    <div class='overlay' id={{tag.name}}>
+      <img class='close' src='assets/close.png' (click)="displayOverlay(tag.name, 'none'); $event.stopPropagation()" />
+      <img class='thumbnail' src="{{tag.thumbnail}}" />
+      <div class="wrapper">
+        <div>
+          {{tag.caption}}
+        </div>
+      </div>
+    </div>
+  </li>
+  <li id='more_button' *ngIf="showMoreButton" (click)="updateDisplayedTags()">gimme more ...</li>
+</ul>
+<div id="footer"></div>
+
+<button id='copy' ngxClipboard [cbContent]="getText()">Copy text with {{ selectedCount }} #hashtags</button>
